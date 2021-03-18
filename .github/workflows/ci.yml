@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and Run Tests
+      uses: sersoft-gmbh/xcodebuild-action@v1.3
+      with:
+        workspace: ComposableOpenURL.xcworkspace
+        scheme: ComposableOpenURL
+        destination: "platform=iOS Simulator,OS=14.4,name=iPhone 12"
+        action: test
