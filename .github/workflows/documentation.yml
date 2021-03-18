@@ -14,7 +14,7 @@ jobs:
       - name: Generate Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-          base-url: /composable-open-url/
+          base-url: /
           format: html
           inputs: Sources/ComposableOpenURL
           module-name: ComposableOpenURL
