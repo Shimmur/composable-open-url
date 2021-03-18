@@ -14,10 +14,10 @@ jobs:
       - name: Generate Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-          base-url: /swift-responsive-textfield/
+          base-url: /composable-open-url/
           format: html
-          inputs: Sources/ResponsiveTextField
-          module-name: ResponsiveTextField
+          inputs: Sources/ComposableOpenURL
+          module-name: ComposableOpenURL
           output: Documentation
       - name: Update Permissions
         run: 'sudo chown --recursive $USER Documentation'
