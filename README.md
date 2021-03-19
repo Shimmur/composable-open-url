@@ -107,7 +107,7 @@ let featureReducer = Reducer<FeatureState, FeatureAction, Void> { state, action,
 )
 ```
 
-Next, you need to attach the view modifier to our view amd hand it a store scoped to the URL state that you will want to open:
+Next, you need to attach the view modifier to our view and hand it a store scoped to the URL state that you want to open:
 
 ```swift
 struct FeatureView: View {
