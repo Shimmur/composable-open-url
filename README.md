@@ -76,7 +76,7 @@ There are a number of advantages to this approach:
 * Minimal boilerplate - just three lines of code to integrate the URL opening domain into your feature domain, and a single SwiftUI view modifier to attach the URL opening behaviour to your view.
 * Opening a URL is a one-line state mutation and you don’t even need to take care of setting it back to `nil` again once the URL has been opened as the component handles it for you.
 * Easy to test - its just a state mutation so you can test this like any other state mutation using `TestStore`.
-* You can directly hook into the OpenURL actions in your own feature reducer if yiu need to perform some additional logic or handle URLs that cannot be opened.
+* You can directly hook into the OpenURL actions in your own feature reducer if you need to perform some additional logic or handle URLs that cannot be opened.
 
 So with all this said, what does it actually look like? Lets adapt the previous example to use the new component.
 
