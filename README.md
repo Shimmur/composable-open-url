@@ -1,7 +1,6 @@
 # ComposableOpenURL
 
 [![CI](https://github.com/Shimmur/composable-open-url/actions/workflows/ci.yml/badge.svg)](https://github.com/Shimmur/composable-open-url/actions/workflows/ci.yml)
-[![GitHub license](https://img.shields.io/github/license/Shimmur/composable-open-url.svg)](https://github.com/Shimmur/composable-open-url/blob/main/LICENSE)
 
 ## State-driven URL opening for The Composable Architecture
 
