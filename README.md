@@ -65,21 +65,22 @@ store.assert(
 )
 ```
 
-For these reasons, inspired by the existing `TextState`, `AlertState` and `ActionSheetState` components I took a more state-base approach.
+For these reasons, inspired by the existing `TextState`, `AlertState` and `ActionSheetState` components this library takes a more state-base approach.
 
 ## State-based URL opening
 
-The way this component works is around a feature domain based on a single value of type `URL?` - the idea is that you have some URL property in your feature domain that you set to a value you need opening and it just opens. Conceptually, the feature is saying “this is the URL that should be opened” and the actual effect of opening it in whatever external application should handle it is handled entirely in the view layer, using a SwiftUI view modifier.
+The way this component works is around a feature domain based on a single value of type `URL?` - the idea is that you have some URL property in your feature domain that you set to a value you need opening and it just opens. Conceptually, the feature is saying “this is the URL that should be opened” and the actual effect of opening it in whatever external application should handle it is handled entirely in the view layer, using a SwiftUI view modifier, as a result of the state change.
 
 There are a number of advantages to this approach:
 
 * Minimal boilerplate - just three lines of code to integrate the URL opening domain into your feature domain, and a single SwiftUI view modifier to attach the URL opening behaviour to your view.
 * Opening a URL is a one-line state mutation and you don’t even need to take care of setting it back to `nil` again once the URL has been opened as the component handles it for you.
 * Easy to test - its just a state mutation so you can test this like any other state mutation using `TestStore`.
+* You can directly hook into the OpenURL actions in your own feature reducer if yiu need to perform some additional logic or handle URLs that cannot be opened.
 
 So with all this said, what does it actually look like? Lets adapt the previous example to use the new component.
 
-Firstly you need to embed the URL opening domain in our feature domain:
+Firstly you need to embed the URL opening domain in your feature domain:
 
 ```swift
 import ComposableArchitecture
@@ -91,7 +92,7 @@ struct FeatureState {
 
 enum FeatureAction {
   case tappedOpenURLButton
-  case openURL(OpenURLViewAction) // 2. Embed the components domain actions
+  case openURL(OpenURLViewAction) // 2. Embed the component domain actions
 }
 
 let featureReducer = Reducer<FeatureState, FeatureAction, Void> { state, action, _ in
@@ -106,7 +107,7 @@ let featureReducer = Reducer<FeatureState, FeatureAction, Void> { state, action,
 )
 ```
 
-Next, you need to attach the view modifier to our view:
+Next, you need to attach the view modifier to our view amd hand it a store scoped to the URL state that you will want to open:
 
 ```swift
 struct FeatureView: View {
@@ -157,7 +158,7 @@ No mocks, no dependencies, no mutable local state and no raw assertions in `.do`
 
 ## Copyright and License
 
-This library was developed out of work on our app here at [Community.com](http://community.com) and is made available under the [Apache 2.0 license](LICENSE).
+This library was developed out of the work on our app here at [Community.com](http://community.com) and is made available under the [Apache 2.0 license](LICENSE).
 
 ```
 Copyright 2021 Community.com, Inc.
