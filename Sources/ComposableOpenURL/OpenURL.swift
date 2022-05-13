@@ -109,6 +109,44 @@ public extension Reducer where State: Equatable {
   }
 }
 
+public extension ReducerProtocol {
+  func opensURL(
+    state toLocalState: WritableKeyPath<State, URL?>,
+    action toLocalAction: CasePath<Action, OpenURLViewAction>
+  ) -> OpenURLReducer<Self> {
+    OpenURLReducer(
+      upstream: self,
+      toLocalState: toLocalState,
+      toLocalAction: toLocalAction
+    )
+  }
+}
+
+public struct OpenURLReducer<Upstream: ReducerProtocol>: ReducerProtocol {
+  @usableFromInline
+  let upstream: Upstream
+  
+  @usableFromInline
+  let toLocalState: WritableKeyPath<Upstream.State, URL?>
+  
+  @usableFromInline
+  let toLocalAction: CasePath<Upstream.Action, OpenURLViewAction>
+  
+  @inlinable
+  public var body: some ReducerProtocol<Upstream.State, Upstream.Action> {
+    Pullback(state: toLocalState, action: toLocalAction) {
+      Reduce<URL?, OpenURLViewAction> { state, action in
+        switch action {
+        case .openedURL, .urlNotSupported:
+          state = nil
+          return .none
+        }
+      }
+    }
+    upstream
+  }
+}
+
 /// Represents the domain of opening URLs and can be embedded in your feature domain actions.
 ///
 public enum OpenURLViewAction: Equatable {

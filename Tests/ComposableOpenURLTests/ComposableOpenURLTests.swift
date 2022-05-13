@@ -56,5 +56,34 @@ class OpenURLTests: XCTestCase {
             $0.url = nil
         }
     }
+    
+    func testOpenURLReducerProtocol() {
+        let reducer = Reduce<AppState, AppAction> { state, action in
+            switch action {
+            case .tappedToOpen:
+                state.url = URL(string: "http://example.com")
+                return .none
+            case .openURL:
+                return .none
+            }
+        }
+        .opensURL(
+            state: \.url,
+            action: /AppAction.openURL
+        )
+        
+        let store = _TestStore(
+            initialState: AppState(),
+            reducer: reducer
+        )
+        
+        store.send(.tappedToOpen) {
+            $0.url = URL(string: "http://example.com")
+        }
+        
+        store.send(.openURL(.openedURL(true))) {
+            $0.url = nil
+        }
+    }
 }
 #endif
