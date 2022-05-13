@@ -17,7 +17,10 @@ let package = Package(
             targets: ["ComposableOpenURL"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.16.0"),
+        .package(
+            url: "https://github.com/pointfreeco/swift-composable-architecture",
+            from: "0.34.0"
+        ),
     ],
     targets: [
         .target(
