@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/Shimmur/composable-open-url/actions/workflows/ci.yml/badge.svg)](https://github.com/Shimmur/composable-open-url/actions/workflows/ci.yml)
 
+**Note:** This library is no longer maintained - you should use the built-in `openURL` effect that comes with `swift-dependencies`.
+
 ## State-driven URL opening for The Composable Architecture
 
 ComposableOpenURL is a standalone component designed to be used with the [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture).
@@ -173,5 +175,5 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License. 
+limitations under the License.
 ```
